@@ -1,17 +1,12 @@
 import { Card, CardHeader, CardBody, CardFooter, Flex, Box, Avatar, Heading } from '@chakra-ui/react'
 import { ChatIcon,TriangleDownIcon,TriangleUpIcon } from '@chakra-ui/icons'
 import { useForumContext } from '../store/forumContext'
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-export const Post = ({post:currPost}) => {
+export const Post = ({post}) => {
     const{data:{user},dispatchForumData}=useForumContext();
-    const {postId} =useParams();
-    let post=currPost;
-    console.log(post,"post")
-    if(postId!==null && !post){
-        post=user.posts.filter(post=>post.postId===postId)
-    }
+   
   return (
     <Card>
         <Flex justifyContent="flex-start" alignItems="center">

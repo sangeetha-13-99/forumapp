@@ -13,7 +13,7 @@ export const Filter = () => {
         <select onChange={(e)=>changeHandler(e)}>
             <option value="LATEST">By Latest Posts</option>
             <option value="UPVOTE">By UpVotes</option>
-            <option value="DOWNVOTE">By UpVotes</option>
+            <option value="DOWNVOTE">By DownVotes</option>
         </select>
     </div>
   )

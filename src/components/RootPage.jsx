@@ -1,6 +1,6 @@
 import { Grid, GridItem,Flex, Heading, Avatar } from "@chakra-ui/react";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import {forumData} from "./../db"
 import { Filter } from "./Filter";
 import { Post } from "./Post";
@@ -39,10 +39,7 @@ export const RootPage = () => {
         </Flex>
       </GridItem>
       <GridItem colSpan={3} >
-        {user.posts.map((post)=>{
-            console.log(post)
-            return <Post key={post.postId} post={post}/>
-        })}
+        <Outlet/>
       </GridItem>
       <GridItem colSpan={1} >
         <Filter/>
