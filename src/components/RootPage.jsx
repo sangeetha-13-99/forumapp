@@ -38,7 +38,7 @@ export const RootPage = () => {
             </Flex>
         </Flex>
       </GridItem>
-      <GridItem colSpan={3} >
+      <GridItem colSpan={3} overflow="auto" >
         <Outlet/>
       </GridItem>
       <GridItem colSpan={1} >

@@ -24,7 +24,16 @@ export const forumData = {
             likes: 0,
             comment: "Interested",
             createdAt: "2023-06-24T12:01:00Z"
+          },
+          {
+            commentId: "89898-856-875789",
+            username: "ashwin",
+            picUrl: "http://bit.ly/42Zm7tM",
+            likes: 0,
+            comment: "Interested",
+            createdAt: "2023-06-24T12:01:00Z"
           }
+
         ],
         isBookmarked: false
       },

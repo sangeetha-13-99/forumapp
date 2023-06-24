@@ -1,7 +1,8 @@
 import { Card, CardHeader, CardBody, CardFooter, Flex, Box, Avatar, Heading } from '@chakra-ui/react'
-import { ChatIcon,TriangleDownIcon,TriangleUpIcon } from '@chakra-ui/icons'
+import { ChatIcon } from '@chakra-ui/icons'
 import { useForumContext } from '../store/forumContext'
 import { Link } from 'react-router-dom';
+import { MdArrowDropDown, MdArrowDropUp,MdChatBubbleOutline,MdShare,MdOutlineBookmarkBorder, MdOutlineBookmark,MdCircle } from 'react-icons/md';
 
 
 export const Post = ({post}) => {
@@ -10,21 +11,27 @@ export const Post = ({post}) => {
   return (
     <Card>
         <Flex justifyContent="flex-start" alignItems="center">
-            <Flex justifyContent="flex-start" alignItems="center" flexDirection="column">
-                <TriangleUpIcon onClick={()=>dispatchForumData({type:'UPVOTE',payload:post.postId})}/>
-                    {post.upvotes>post.downvotes?post.upvotes:-post.downvotes}
-                <TriangleDownIcon onClick={()=>dispatchForumData({type:'DOWNVOTE',payload:post.postId})}/>
-            </Flex>
+        <Flex justifyContent="flex-start" alignItems="center" flexDirection="column">
+                    <MdArrowDropUp size="3.5rem" fill={post.upvotes>post.downvotes?'purple':'gray'} onClick={()=>dispatchForumData({type:'UPVOTE',payload:post.postId})} />
+                        {post.upvotes>post.downvotes?post.upvotes:-post.downvotes}
+                    <MdArrowDropDown size="3.5rem" fill={post.upvotes<post.downvotes?'purple':'gray'} onClick={()=>dispatchForumData({type:'DOWNVOTE',payload:post.postId})}/>
+                </Flex>
             <div>
 
                 <CardHeader>
-                    <Flex justifyContent="space-around" alignItems="center" alignSelf="flex-start" >
-                        <Avatar src={post.picUrl} alt={post.name}/>
-                        <div>
-                            <p>{post.name}</p>
-                            <p>@{post.username}</p>
-                            <Heading>{post.post}</Heading>
-                        </div>
+                    <Flex alignItems="center" alignSelf="flex-start" >
+                        <Avatar src={post.picUrl} alt={post.name} />
+                        <Box pl="8" textAlign="left">
+                        <p>posted by @{post.username} <MdCircle color="gray" style={{display:'inline', width:"8px"}} /> {post.createdAt}</p>
+                            <Heading fontSize="1rem">{post.post}</Heading>
+                            <Flex alignItems="center" alignSelf="flex-start" justifyContent="flex-start" >
+                                {post.tags.map(tag=>{
+                                    return (
+                                        <Box p="4px" m="4px" bg="blue.100" opacity="0.7" borderRadius="8px" fontSize="10px" color="purple">{tag}</Box>
+                                    )
+                                })}
+                            </Flex>
+                        </Box>
                     </Flex>
                 </CardHeader>
                 <CardBody>
@@ -32,13 +39,16 @@ export const Post = ({post}) => {
                 </CardBody>
             </div>
         </Flex>
-        <CardFooter>
-            <Flex justifyContent="space-between" alignItems="center">
+        <CardFooter borderTop="1px solid black">
+            <Flex justifyContent="space-between" alignItems="center" w="100%">
                 <Link to={`posts/${post.postId}`}>
-                    <ChatIcon/>
+                    <MdChatBubbleOutline size="2rem"/>
                 </Link>
-                <button>Share</button>
-                <button onClick={()=>dispatchForumData({type:'BOOKMARK',payload:post.postId})}>bookmark</button>
+                <MdShare size="2rem"/>
+                {post.isBookmarked?
+                    <MdOutlineBookmarkBorder size="2rem" color="black" onClick={()=>dispatchForumData({type:'BOOKMARK',payload:post.postId})}/>:
+                    <MdOutlineBookmark size="2rem" color="purple" onClick={()=>dispatchForumData({type:'BOOKMARK',payload:post.postId})}/>
+                }
             </Flex>
         </CardFooter>
     </Card>
