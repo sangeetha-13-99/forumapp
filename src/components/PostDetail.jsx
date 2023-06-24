@@ -32,6 +32,13 @@ export const PostDetail = () => {
                         <Box pl="8" textAlign="left">
                         <p>posted by @{post.username} <MdCircle color="gray" style={{display:'inline', width:"8px"}} /> {post.createdAt}</p>
                             <Heading fontSize="1rem">{post.post}</Heading>
+                            <Flex alignItems="center" alignSelf="flex-start" justifyContent="flex-start" >
+                                {post.tags.map(tag=>{
+                                    return (
+                                        <Box p="4px" m="4px" bg="blue.100" opacity="0.7" borderRadius="8px" fontSize="10px" color="purple">{tag}</Box>
+                                    )
+                                })}
+                            </Flex>
                         </Box>
                     </Flex>
                 </CardHeader>
